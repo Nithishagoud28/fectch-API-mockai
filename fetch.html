@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+        ::-webkit-scrollbar{
+            display: none;
+        }
+        @media screen and (max-width: 1024px) {
+    #main_div {
+        flex-wrap: wrap;
+        gap: 15px;
+    }
+    .card {
+        width: 220px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    #main_div {
+        flex-direction: column;
+        align-items: center;
+    }
+    .card {
+        width: 90%;
+    }
+    img {
+        width: 100%;
+        height: auto;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    h1, h2 {
+        font-size: 1.2rem;
+    }
+    p, p1 {
+        font-size: 0.9rem;
+    }
+    .card {
+        width: 95%;
+    }
+}
+
+
+        
+    </style>
+  </head>
+  <body>
+    <!-- <button id="btn">click here</button><br> -->
+    <script>
+
+    //    let btn=document.getElementById("btn")
+    //     btn.addEventListener("click",()=>{
+    //         location.assign("./loader.html")
+    //     })
+
+
+        main_div=document.createElement("div")
+        document.body.append(main_div)
+        main_div.style.display="flex"
+        main_div.style.flexwrap="wrap"
+        main_div.style.justifyContent="center"
+        main_div.style.gap="10px"
+
+        
+      let data = fetch("https://679b721b33d316846323e05b.mockapi.io/fooditems");
+      data
+        .then((x) => x.json())
+        .then((x) => {
+          let res=x;
+          res.map((x)=>{
+            let restaurant = document.createElement("h1");
+            restaurant.innerHTML = x.restaurant;
+            restaurant.style.border="1px solid"
+            restaurant.style.backgroundColor="lightcoral"
+           
+            let poster=document.createElement("img")
+            poster.src=x.poster
+            poster.style.height="350px"
+            poster.style.width="250px"
+
+            let name=document.createElement("h2")
+            name.innerHTML=x.name
+            name.style.border="1px solid"
+             name.style.backgroundColor="pink"
+
+            let description=document.createElement("p")
+            description.innerHTML=x.description
+            description.style.overflow="scroll"
+            description.style.backgroundColor="lavender"
+
+            let mainIngredients=document.createElement("p1")
+            mainIngredients.innerHTML=x.mainIngredients
+            // mainIngredients.style.overflow="scroll"
+            mainIngredients.style.backgroundColor="bisque"
+
+            let rating=document.createElement("h2")
+            rating.innerHTML=x.rating
+            rating.style.border="1px solid"
+            rating.style.textAlign="center"
+            rating.style.backgroundColor="lightskyblue"
+
+            let card=document.createElement("div")
+            card.append(restaurant,poster,name,description,mainIngredients,rating)
+            card.style.border="3px solid black"
+            card.style.width="250px"
+             card.style.padding="10px"
+             card.style.backgroundColor="grey"
+            main_div.append(card)
+      // document.body.append(restaurant)
+          })
+        })
+        .catch((x)=>{console.log(x)});
+
+    
+    </script>
+  </body>
+</html>
